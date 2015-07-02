@@ -19,19 +19,29 @@ app.post('/', function (req, res) {
   	// Grab only the first <svg> element
   	var result = re.exec(fields['svg'][0]);
   	// Open file for writing
-  	var writeFile = fs.openSync('./input_svg.svg', 'w');
+  	var svgWriteFile = fs.openSync('./input_svg.svg', 'w');
+		var infoWriteFile = fs.openSync('./info.json', 'w');
+
+		var infoJson = [
+			{
+				"input" : "input_svg.svg " + fields['w'][0] + ":" + fields['h'][0],
+				"output": [ "output_image." + fields['t'][0] + " " + fields['w'][0] + ":" + fields['h'][0] ]
+			}
+		];
   	// Inject header
-  	var svgString = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">' 
-  		+ result[1]; 
+  	var svgString = '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">'
+  		+ result[1];
   	// Fix namespacing
   	var stringToWrite = svgString.replace('xlink="http://www.w3.org/1999/xlink"', 'xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"');
-  	// Write SVG to file
-    fs.write(writeFile, stringToWrite, function(){
-    	// Render that shit.
-    	svgexport.render('./info.json', function(err, data){
-				if (err){
-					console.log(err);
-				}
+		// Write SVG to file
+    fs.write(svgWriteFile, stringToWrite, function(){
+    	fs.write(infoWriteFile, JSON.stringify(infoJson), function(){
+				// Render that shit.
+				svgexport.render('./info.json', function(err, data){
+					if (err){
+						console.log(err);
+					}
+				});
 			});
     });
   });

@@ -1,6 +1,1 @@
-[ 
-	{
-		"input" : "input_svg.svg 600:400",
-		"output": [ "output_image.png 600:400" ]
-	}
-]
+[{"input":"input_svg.svg 600:400","output":["output_image.png 600:400"]}]
