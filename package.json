@@ -1,0 +1,27 @@
+{
+  "name": "zingchart-export-node",
+  "version": "1.0.0",
+  "description": "An export server for exporting charts to png, jpg, svg, and pdf.",
+  "main": "export.js",
+  "dependencies": {
+    "multiparty": "^4.1.2",
+    "phantom": "^0.7.2",
+    "chalk": "^1.1.0",
+    "express": "^4.13.0",
+    "regex": "^0.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NMastracchio/zingchart-export-server.git"
+  },
+  "author": "zingchart",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NMastracchio/zingchart-export-server/issues"
+  },
+  "homepage": "https://github.com/NMastracchio/zingchart-export-server#readme"
+}
